@@ -99,4 +99,41 @@ $('#btn9').click(function () {
 });
 
 
+//Display time using moment.js
+$('#currentDay').append(timeNow);
+
+
+// add color coding to show user if time slot is past, present or future
+colorCoding();
+
+function colorCoding() {
+    TIMER = setInterval(colorCoding, 1000);
+
+    if (hourNow24 >= 9 && hourNow24 <= 17) {
+
+        for (let i = 1; i <= 9; i++) {
+            let hourInInt = parseInt($('#time' + i).text());
+
+            if (hourInInt < 9) {
+                hourInInt = hourInInt + 12;
+            }
+
+            if (hourInInt == hourNow24) {
+                $('#text' +i).css('backgorund-color', '#FB8F78');
+                continue;
+            }
+            if (hourInInt < hourNow24) {
+                $('#text' + i).css('background-color', 'lightgray');
+            }
+            else {
+                $('#text' +i).css('background-color', 'lightgreen');
+            }
+
+        }
+    }
+    else {
+        clearInterval(TIMER);
+        $('textarea').css('background-color', 'pink');
+    }
+}
 
